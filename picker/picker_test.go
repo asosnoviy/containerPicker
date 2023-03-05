@@ -29,6 +29,30 @@ func TestPicker_Calculate(t *testing.T) {
 	fmt.Println(answer.Nums)
 }
 
+func TestPicker_CalculateZero(t *testing.T) {
+
+	example := []int{
+		2, 3, 5, 7, 10, 15,
+	}
+
+	answer := picker.Calculate(example, 0)
+	assert.Equal(t, false, answer.Can)
+	assert.Equal(t, 0, answer.Count)
+	assert.Equal(t, []int{}, answer.Nums)
+
+	answer = picker.Calculate(example, 1)
+	assert.Equal(t, false, answer.Can)
+	assert.Equal(t, 0, answer.Count)
+	assert.Equal(t, []int{}, answer.Nums)
+
+	answer = picker.Calculate(example, 2)
+	assert.Equal(t, true, answer.Can)
+	assert.Equal(t, 1, answer.Count)
+	assert.Equal(t, []int{0}, answer.Nums)
+
+}
+
+
 func TestPicker_CalculateMega(t *testing.T) {
 
 	cntConteiners := 10000

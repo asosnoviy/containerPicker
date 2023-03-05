@@ -89,9 +89,13 @@ func (p *Picker) Calculate(set []int, needCnt int) Answer {
 	for index := sum; 0 <= index; index-- {
 
 		if can[index][n] {
-			return Answer{Can: can[index][n], Count: count[index][n], Nums: num[index][n]}
+			return Answer{
+				Can:   can[index][n] && count[index][n] > 0,
+				Count: count[index][n],
+				Nums:  num[index][n],
+			}
 
 		}
 	}
-	return Answer{}
+	return Answer{Can: false}
 }
