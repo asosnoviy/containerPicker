@@ -22,7 +22,12 @@ func NewPicker() *Picker {
 
 func (p *Picker) Calculate(set []int, needCnt int) Answer {
 
-	sum := needCnt
+	cntsum := 0
+	for _, value := range set {
+		cntsum += value
+	}
+
+	sum := int(math.Min(float64(needCnt), float64(cntsum)))
 	n := len(set)
 
 	YSize := sum + 1

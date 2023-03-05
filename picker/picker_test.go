@@ -65,6 +65,18 @@ func TestPicker_CalculateMore(t *testing.T) {
 
 }
 
+func TestPicker_CalculateMaxCount(t *testing.T) {
+
+	example := []int{
+		20, 20, 15, 20, 15, 10, 10, 20, 10, 20, 15, 10, 15, 10, 10, 20, 15, 20, 20, 15, 20, 15, 15, 10, 15, 20, 15, 15, 10, 10, 10, 10, 10, 10, 10, 15,
+		10, 15, 100, 20, 15, 20, 26, 100, 15, 67, 15, 7, 10, 20, 100, 100, 20, 20, 20, 15, 20, 100, 100}
+
+	answer := picker.Calculate(example, 10000000)
+	assert.Equal(t, true, answer.Can)
+	assert.Equal(t, len(example), answer.Count)
+
+}
+
 func TestPicker_CalculateMega(t *testing.T) {
 
 	cntConteiners := 10000
