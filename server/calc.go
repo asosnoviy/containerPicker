@@ -39,15 +39,24 @@ func (s *Server) call(w http.ResponseWriter, r *http.Request) {
 		errorResponse(w, "Bad Request "+err.Error(), http.StatusInternalServerError)
 		return
 	}
-	errorResponse(w, string(jsonData), http.StatusOK)
+	OkResponse(w, jsonData)
 
+}
+
+func OkResponse(w http.ResponseWriter, message []byte) {
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(message)
 }
 
 func errorResponse(w http.ResponseWriter, message string, httpStatusCode int) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(httpStatusCode)
+
 	resp := make(map[string]string)
-	resp["status"] = message
+	resp["Status"] = message
 	jsonResp, _ := json.Marshal(resp)
+
 	w.Write(jsonResp)
 }
